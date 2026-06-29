@@ -4,8 +4,28 @@
 #include <Console.h>
 #include <Input.h>
 
+class SampleClass
+{
+public:
+	static int DoIt(int num)
+	{
+		std::cout << "Done it. " << num << "\n";
+		return 5;
+	}
+	void PrintMe(std::string message)
+	{
+		std::cout << message;
+	}
+};
+
 int main(int argc, char* args[])
 {
+	SampleClass sample;
+	sample.PrintMe("Hello Gotham!");
+
+	SampleClass::DoIt(5);
+	std::string myMalfunction = Input::GetString("What is your malfunction?");
+
 	Day2 day2;
 
 	int menuSelection = 0;
@@ -42,6 +62,8 @@ int main(int argc, char* args[])
 			//  Experiment with changing the colors.
 			//  Open the Console.h file (look in Misc/Console in Solution Explorer) to see how the methods are declared.
 			//
+			Console::WriteLine("Here is my message on one line.", ConsoleColor::Cyan);
+			Console::Write("Here is my 2nd message on one line.", ConsoleColor::Cyan, ConsoleColor::Yellow);
 			break;
 		}
 		case 2:
@@ -71,6 +93,8 @@ int main(int argc, char* args[])
 			//	Print the name that the user enters.
 			//	Open the Input.h file(look in Misc / Input in Solution Explorer) to see how the GetString is declared.
 			//
+			std::string name = Input::GetString("What is your name?");
+			std::cout << "Your name is " << name << "?\n";
 			break;
 		}
 		case 6:
@@ -85,6 +109,8 @@ int main(int argc, char* args[])
 			//	Print the age that the user enters.
 			//	Open the Input.h file(look in Misc / Input in Solution Explorer) to see how the GetInteger is declared.
 			//
+			int age = Input::GetInteger("What is your age?", 1, 120);
+			std::cout << "Your age is " << age << "? Weird.\n";
 			break;
 		}
 		case 7:

@@ -68,6 +68,10 @@ void Day1::PartA_1_1()
 			//Part A-1.1: move player to a predefined Target spot (get target's location, player.move)
 			// 		HINT: explore the Player.h file to see what methods could be used.
 			//
+			for (int i = 0; i < 6; i++)
+			{
+				player.MoveRight();
+			}
 
 
 			while (!quit)
@@ -156,6 +160,10 @@ void Day1::PartA_1_2()
 			//Part A-1.2: move player to a predefined Target spot (get target's location, player.move)
 			// 		HINT: explore the Player.h file to see what methods could be used.
 			//
+			for (size_t i = 0; i < 4; i++)
+			{
+				player.MoveDown();
+			}
 
 
 			while (!quit)
@@ -247,6 +255,12 @@ void Day1::PartA_1_3()
 			//      use the move methods of the player
 			// 		HINT: explore the Player.h file to see what methods could be used.
 			//
+			for (size_t i = 0; i < 5; i++)
+			{
+				player.MoveDown();
+				player.MoveRight();
+			}
+			player.MoveRight();
 
 
 			while (!quit)
@@ -279,6 +293,21 @@ void Day1::PartA_1_3()
 //
 // Part A-2.2: create the DEFINITION for CreateTargets_PartA_2
 //
+std::vector<Target> Day1::CreateTargets_PartA_2(int mapSize, int colorRange)
+{
+	std::vector<Target> targetVec;
+	//what does this method do??
+	for (int i = 0; i < 10; i++)
+	{
+		Target t;
+		//  % - modulo. divides by a number and returns the remainder
+		// rand() - C random generator. returns a value between 0 - 32767
+		t.col = rand() % mapSize; //0 - (mapSize-1)
+		t.row = rand() % mapSize; //0 - (mapSize-1)
+		targetVec.push_back(t);
+	}
+	return targetVec;
+}
 
 void Day1::PartA_2()
 {
@@ -325,6 +354,7 @@ void Day1::PartA_2()
 		// Part A-2.3: Call CreateTargets_PartA_2 and store the returned vector into the "targets" variable.
 		//
 		std::vector<Target> targets;
+		targets = Day1::CreateTargets_PartA_2(mapSize, colorRange);
 
 		float scale = 0.25f;
 		Player player(&engine, scale, 1, 1);
