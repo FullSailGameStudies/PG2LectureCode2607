@@ -12,7 +12,7 @@ public:
 		std::cout << "Done it. " << num << "\n";
 		return 5;
 	}
-	void PrintMe(std::string& message)
+	void PrintMe(const std::string& message)
 	{
 		std::cout << message;
 	}
@@ -35,11 +35,12 @@ void Incrementer(int& num)
 	std::cout << num << "\n";
 }
 
+const float PI = 3.1415;
 
 int main(int argc, char* args[])
 {
 	SampleClass sample;
-	//sample.PrintMe("Hello Gotham!");
+	sample.PrintMe("Hello Gotham!");
 
 	SampleClass::DoIt(5);
 	std::string myMalfunction = Input::GetString("What is your malfunction?");
@@ -50,11 +51,62 @@ int main(int argc, char* args[])
 	numRef = num2;
 	Incrementer(number);
 	std::cout << number << "\n";
-	std::vector<int> nums{ 1,2,3,4,5,6 };
+	std::vector<int> nums{ 1,2,3,4,5,6,6,8,6 };
 	for (int i = 0; i < nums.size(); i++)
 	{
 		std::cout << nums[i] << "\n";
 	}
+	//remove 6 from nums
+	//we need an iterator
+	//an iterator is an object that points into the vector
+	//it also knows how to move through the container
+	//vector.begin() - iterator to the first item
+	//vector.end() - iterator to the item AFTER the last item
+	//vector.erase(iterator);
+	nums.erase(nums.begin() + 5);
+
+	for (int i = 0; i < nums.size();i++)
+	{
+		if (nums[i] == 6)
+		{
+			nums.erase(nums.begin() + i);
+			i--;
+		}
+	}
+	//OR...
+	for (int i = 0; i < nums.size(); )
+	{
+		if (nums[i] == 6)
+		{
+			nums.erase(nums.begin() + i);			
+		}
+		else
+		{
+			i++;
+		}
+	}
+	//OR...
+	for (int i = nums.size() - 1; i >= 0; i--)
+	{
+		if (nums[i] == 6)
+		{
+			nums.erase(nums.begin() + i);
+		}
+	}
+
+	for (std::vector<int>::iterator it = nums.begin(); it != nums.end() ; )
+	{
+		//* - "dereferences" the "pointer"
+		//  give me what you're pointing to
+		if (*it == 6)
+		{
+			it = nums.erase(it);
+		}
+		else {
+			it++;
+		}
+	}
+
 	//range-based for (foreach)
 	for (int& n : nums)
 	{

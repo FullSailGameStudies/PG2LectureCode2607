@@ -7,7 +7,7 @@
 //
 // Part B-1.1: Add a method definition for SpawnZombies
 //
-void Day2::SpawnZombies(PG2Graphics& engine, std::vector<Zombie>& mobs, Player& p1)
+void Day2::SpawnZombies(PG2Graphics& engine, std::vector<Zombie>& mobs, const Player& p1) const
 {
 	int x, y;
 	int px = p1.GetXPosition();
@@ -25,14 +25,44 @@ void Day2::SpawnZombies(PG2Graphics& engine, std::vector<Zombie>& mobs, Player& 
 	}
 }
 
+
 //
 // Part B-2.1: Add a method definition for RenderZombies
 //
+void Day2::RenderZombies(const std::vector<Zombie>& mobs) const
+{
+	for (const Zombie& zeek : mobs)
+	{
+		zeek.Render();
+	}
+}
+
 
 //
 // Part B-3.1: Add a method definition for EraseZombies
 //
-
+int Day2::KillZombies(std::vector<Zombie>& mobs, const Player& p1) const
+{
+	int x1, y1;
+	int x2 = p1.GetXPosition();
+	int y2 = p1.GetYPosition();
+	int erased = 0;
+	for (int i = 0; i < mobs.size();)
+	{
+		x1 = mobs[i].GetXPosition();
+		y1 = mobs[i].GetYPosition();
+		float dist = sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+		if (dist < 4)
+		{
+			mobs.erase(mobs.begin() + i);
+			erased++;
+		}
+		else {
+			i++;
+		}
+	}
+	return erased;
+}
 
 
 
@@ -101,6 +131,7 @@ void Day2::PartB(int option)
 								//
 								// Part B-3.3 Call KillZombies
 								//
+								KillZombies(mobs, player);
 							}
 						}
 						else if (e.key.keysym.sym == SDLK_r)
@@ -109,6 +140,7 @@ void Day2::PartB(int option)
 							//
 							// Part B-1.3 Call SpawnZombies
 							//
+							SpawnZombies(engine, mobs, player);
 						}
 					}
 				}
@@ -120,6 +152,7 @@ void Day2::PartB(int option)
 				//
 				// Part B-2.3 call RenderZombies
 				//
+				RenderZombies(mobs);
 
 
 				player.Render();
