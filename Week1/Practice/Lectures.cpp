@@ -12,19 +12,55 @@ public:
 		std::cout << "Done it. " << num << "\n";
 		return 5;
 	}
-	void PrintMe(std::string message)
+	void PrintMe(std::string& message)
 	{
 		std::cout << message;
 	}
 };
 
+//pass by value (COPY)
+// num is a new variable.
+// it gets its value when the method is called
+// that value is COPIED in to it
+
+//pass by reference (ALIAS)
+//WHEN?
+//	1) the method needs to change the variable
+//		in the other scope
+//  2) we want to prevent a copy
+//		criteria? if it's a class, pass by reference
+void Incrementer(int& num)
+{
+	num++;
+	std::cout << num << "\n";
+}
+
+
 int main(int argc, char* args[])
 {
 	SampleClass sample;
-	sample.PrintMe("Hello Gotham!");
+	//sample.PrintMe("Hello Gotham!");
 
 	SampleClass::DoIt(5);
 	std::string myMalfunction = Input::GetString("What is your malfunction?");
+
+	int number = 5, num2 = 15;
+	int& numRef = number;//an alias to number
+	numRef = 10;
+	numRef = num2;
+	Incrementer(number);
+	std::cout << number << "\n";
+	std::vector<int> nums{ 1,2,3,4,5,6 };
+	for (int i = 0; i < nums.size(); i++)
+	{
+		std::cout << nums[i] << "\n";
+	}
+	//range-based for (foreach)
+	for (int& n : nums)
+	{
+		std::cout << n << "\n";
+	}
+
 
 	Day2 day2;
 
