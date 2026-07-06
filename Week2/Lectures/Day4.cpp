@@ -84,8 +84,18 @@ void Day4::RecursionExample()
 //
 // Part A-1.1
 //
+void Bats(int i = 0)
+{
+	if (i >= 100) return;
+
+	std::cout << (char)78 << (char)65 << ' ';
+	//i++ - post-increment
+	//++i - pre-increment (slightly better performance)
+	Bats(++i);
+}
 void Day4::PartA_1_1()
 {
+	Bats();
 	char c[] = { '\n', 66, 65, 84, 77, 65, 78, 33, 33 };
 	for (auto ch : c) std::cout << ch;
 
@@ -97,8 +107,15 @@ void Day4::PartA_1_1()
 //
 // Part A-1.2
 //
+void Reverso(const std::string& word, int index = 0)
+{
+	if (index == word.size()) return;
+	Reverso(word, index + 1);
+	std::cout << word[index];
+}
 void Day4::PartA_1_2()
 {
+	Reverso("Batman");
 	std::cout << "\n";
 }
 

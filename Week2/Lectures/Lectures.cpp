@@ -24,7 +24,7 @@ int main(int argc, char* args[])
 	//2 kinds of loops:
 	//   determinate loops (you know how many times it will loop)
 	// indeterminate loops (you don't how many times it will loop)
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 10; ++i)
 	{
 		if (i % 2 == 1) 
 			continue;//jump to the '}' of the loop
