@@ -17,6 +17,24 @@ const int SCREEN_WIDTH = 480;
 const int SCREEN_HEIGHT = 480;
 void Pyramid(SDL_Renderer* renderer, int size, int x, int y)
 {
+	//exit condition: x < 0, y < 0, x+size > width, y+size > height
+	//draw rectangle at x,y with size
+	//present
+	//recursively call
+	if (x < 0 or y < 0 or (x + size) > SCREEN_WIDTH or (y + size) > SCREEN_HEIGHT)
+		return;
+	SDL_Rect rect{ x,y,size,size };
+	SDL_SetRenderDrawColor(renderer, rand() % 255, rand() % 255, rand() % 255, 255);
+	SDL_RenderDrawRect(renderer, &rect);
+	SDL_RenderPresent(renderer);
+	//std::this_thread::sleep_for(std::chrono::milliseconds(10));
+	//std::cout << x << "," << y << "  " << size << "\n";
+	Pyramid(renderer, size + 2, x - 1, y - 1);
+
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	SDL_RenderDrawRect(renderer, &rect);
+	SDL_RenderPresent(renderer);
+
 }
 void Day4::RecursionExample()
 {

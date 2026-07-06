@@ -5,10 +5,39 @@
 #include "Day6.h"
 #include <Input.h>
 
+//there are AT LEAST 2 loops in a recursive loop
+//- going "out" loop
+//- coming "back" loop (unwinding the stack)
+void DoIt(int i)
+{
+	//ALL recursive loops REQUIRE an exit condition (or base case)
+	if(i < 10) //loop while i < 10
+	{
+		std::cout << i << " ";
+		DoIt(i + 1);//recursive case
+		std::cout << i << " ";
+	}
+}//ends the method
 
 int main(int argc, char* args[])
 {
+	//2 kinds of loops:
+	//   determinate loops (you know how many times it will loop)
+	// indeterminate loops (you don't how many times it will loop)
+	for (int i = 0; i < 10; i++)
+	{
+		if (i % 2 == 1) 
+			continue;//jump to the '}' of the loop
+		std::cout << i;
+		
+		if (i == 5)
+		{
+			break;//exits the loop early
+		}
+		//DoIt(i);
+	}
 	srand(static_cast<unsigned int>(time(NULL)));
+	DoIt(0);
 
 	std::string hello = "Hello Week 2!";
 	for (auto& ch : hello)
