@@ -7,7 +7,11 @@
 class SampleClass
 {
 public:
-	static int DoIt(int num)
+	//default parameter
+	//default argument
+	//optional parameter
+	//optional argument
+	static int DoIt(int num2,int num = 0)
 	{
 		std::cout << "Done it. " << num << "\n";
 		return 5;
@@ -16,6 +20,7 @@ public:
 	{
 		std::cout << message;
 	}
+
 };
 
 //pass by value (COPY)
@@ -37,12 +42,19 @@ void Incrementer(int& num)
 
 const float PI = 3.1415;
 
+void Info(const std::vector<int>& nums)
+{
+	//size() - # of items in the vector
+	//capacity() - length of internal aray
+	//size() <= capacity()
+	std::cout << nums.size() << ": " << nums.capacity() << "\n";
+}
 int main(int argc, char* args[])
 {
 	SampleClass sample;
 	sample.PrintMe("Hello Gotham!");
 
-	SampleClass::DoIt(5);
+	SampleClass::DoIt(10);
 	std::string myMalfunction = Input::GetString("What is your malfunction?");
 
 	int number = 5, num2 = 15;
@@ -51,10 +63,14 @@ int main(int argc, char* args[])
 	numRef = num2;
 	Incrementer(number);
 	std::cout << number << "\n";
-	std::vector<int> nums{ 1,2,3,4,5,6,6,8,6 };
-	for (int i = 0; i < nums.size(); i++)
+	std::vector<int> nums;// { 1, 2, 3, 4, 5, 6, 6, 8, 6 };
+	nums.resize(10);
+	nums.reserve(10);//sets the capacity to 10
+	Info(nums);//size = 0   capacity = 0
+	for (int i = 0; i < 10; i++)
 	{
-		std::cout << nums[i] << "\n";
+		nums.push_back(i);
+		Info(nums);
 	}
 	//remove 6 from nums
 	//we need an iterator
