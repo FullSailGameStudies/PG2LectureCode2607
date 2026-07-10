@@ -4,6 +4,7 @@
 #include "Day5.h"
 #include "Day6.h"
 #include <Input.h>
+#include <map>
 
 //there are AT LEAST 2 loops in a recursive loop
 //- going "out" loop
@@ -21,6 +22,43 @@ void DoIt(int i)
 
 int main(int argc, char* args[])
 {
+	//std::vector<int> nummies;
+	//std::cout << nummies[2];
+	std::map<std::string, float> menu;
+	//how to get data into the map?
+	//1) "easy" way  map[key] = value;
+	menu["muffin"] = 3.99f;
+	menu["ribs"] = 29.99f;
+	menu["coffee"] = 2.99f;
+	menu["coffee"] = 4.99f;//overwrites the value
+	std::cout << "Coffee costs " << menu["coffee"] << ".\n";
+	//if the key is not in the map, it will add it!!
+	std::cout << "Dino Nuggies costs " << menu["dino nuggies"] << ".\n";
+
+	//2) "not-easy" way  map.insert(key-value-pair);
+	std::pair<std::string, float> menuPair =
+		std::make_pair("hamburger", 9.99f);
+	auto itemInserted = menu.insert(menuPair);
+	//parts of a pair object:
+	//  first: key
+	//  second: value
+	menuPair.second = 12.99f;
+	itemInserted = menu.insert(menuPair);//does NOT overwrite
+	if (itemInserted.second)//if was inserted
+	{
+
+	}
+	else //was NOT inserted
+	{
+		std::map<std::string, float>::iterator iteratorToKeyValuePairInTheMap = itemInserted.first;
+		std::string menuItemName = iteratorToKeyValuePairInTheMap->first;
+		float menuItemPrice = iteratorToKeyValuePairInTheMap->second;
+		std::cout << menuItemName << " is already on the menu";
+		std::cout << " and it costs " << menuItemPrice << ".\n";
+	}
+
+
+
 	//2 kinds of loops:
 	//   determinate loops (you know how many times it will loop)
 	// indeterminate loops (you don't how many times it will loop)
