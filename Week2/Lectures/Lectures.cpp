@@ -5,6 +5,7 @@
 #include "Day6.h"
 #include <Input.h>
 #include <map>
+#include <iomanip> //helpful methods for cout
 
 //there are AT LEAST 2 loops in a recursive loop
 //- going "out" loop
@@ -12,7 +13,7 @@
 void DoIt(int i)
 {
 	//ALL recursive loops REQUIRE an exit condition (or base case)
-	if(i < 10) //loop while i < 10
+	if (i < 10) //loop while i < 10
 	{
 		std::cout << i << " ";
 		DoIt(i + 1);//recursive case
@@ -34,6 +35,13 @@ int main(int argc, char* args[])
 	std::cout << "Coffee costs " << menu["coffee"] << ".\n";
 	//if the key is not in the map, it will add it!!
 	std::cout << "Dino Nuggies costs " << menu["dino nuggies"] << ".\n";
+
+	//to erase, get an iterator to the key-value pair you want to erase
+	auto dinoIter = menu.find("dino nuggies");
+	if (dinoIter != menu.end())
+		menu.erase(dinoIter);
+
+	menu.erase("dino nuggies");
 
 	//2) "not-easy" way  map.insert(key-value-pair);
 	std::pair<std::string, float> menuPair =
@@ -69,6 +77,34 @@ int main(int argc, char* args[])
 		std::cout << "coffee costs " << foundMenuIterator->second << "\n";
 	}
 
+	//loops for maps
+	std::cout << "\n\nPg2 menu:\n";
+	for (auto iter = menu.begin(); iter != menu.end(); iter++)
+	{
+		//std::setw(#) - sets the next thing printed w/ a set size
+		//std::left - left align
+		//std::right - right align
+		const auto& [itemName, itemPrice] = *iter;
+		std::cout << std::setw(12) << std::left << iter->first << " ";
+		std::cout << std::setw(7) << std::right << iter->second << "\n";
+	}
+
+	std::cout << "\n\nPg2 menu:\n";
+	for (auto& kvp : menu)
+	{
+		std::cout << std::setw(12) << std::left << kvp.first << " ";
+		std::cout << std::setw(7) << std::right << kvp.second << "\n";
+	}
+
+	std::cout << "\n\nPg2 menu:\n";
+	//use structured bindings!!
+	for (auto& [itemName, itemPrice] : menu)
+	{
+		std::cout << std::setw(12) << std::left << itemName << " ";
+		std::cout << std::setw(7) << std::right << itemPrice << "\n";
+	}
+
+
 
 
 	//2 kinds of loops:
@@ -76,10 +112,10 @@ int main(int argc, char* args[])
 	// indeterminate loops (you don't how many times it will loop)
 	for (int i = 0; i < 10; ++i)
 	{
-		if (i % 2 == 1) 
+		if (i % 2 == 1)
 			continue;//jump to the '}' of the loop
 		std::cout << i;
-		
+
 		if (i == 5)
 		{
 			break;//exits the loop early

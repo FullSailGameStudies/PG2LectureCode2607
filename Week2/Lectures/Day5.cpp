@@ -177,6 +177,26 @@ void Day5::PartB_2(int section)
 			//
 			// TODO: (Lecture) Part B-2.2 loop over the std::map
 			//
+			for (auto& [channel, channelLights] : groupedColors)
+			{
+				switch (channel)
+				{
+				case ColorChannel::RED:
+					std::cout << "RED: ";
+					break;
+				case ColorChannel::GREEN:
+					std::cout << "GREEN: ";
+					break;
+				case ColorChannel::BLUE:
+					std::cout << "BLUE: ";
+					break;
+				default:
+					break;
+				}
+				std::cout << channelLights.size() << "\n";
+				grouper.DrawLights(screenMap, channelLights, columnRange, column, row);
+
+			}
 
 
 			//Update screen
@@ -194,6 +214,15 @@ void Day5::PartB_2(int section)
 			//
 			// TODO: (Lecture)  Part B-3 call std::map's find method
 			//
+			foundBlues = groupedColors.find(ColorChannel::BLUE);
+			if (foundBlues == groupedColors.end())
+			{
+				std::cout << "Blue channel not found.\n";
+			}
+			else
+			{
+				std::cout << "Blue channel lights: " << foundBlues->second.size() << "\n";
+			}
 
 			for (auto& [channel, channelLights] : groupedColors)
 			{
@@ -215,6 +244,8 @@ void Day5::PartB_2(int section)
 			//
 			// TODO: (Lecture)  Part C-1 erasing from a std::map
 			//
+			//erase whatever channel you don't like
+			groupedColors.erase(ColorChannel::GREEN);
 
 
 			for (auto& [channel, channelLights] : groupedColors)
