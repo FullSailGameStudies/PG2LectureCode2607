@@ -120,6 +120,50 @@ void Day5::PartB_2(int section)
 		//
 		// TODO: (Lecture) Part B-2.1 fill the std::map
 		// 
+		for (auto& light : allLights)
+		{
+			ColorChannel channel;
+			if (light.blue > light.red and light.blue > light.green)
+			{
+				channel = ColorChannel::BLUE;
+				std::cout << "BLUE: ";
+			}
+			else if (light.red > light.blue and light.red > light.green)
+			{
+				channel = ColorChannel::RED;
+				std::cout << "RED: ";
+			}
+			else
+			{
+				channel = ColorChannel::GREEN;
+				std::cout << "GREEN: ";
+			}
+			std::cout << light.red << "," << light.green << "," << light.blue << "\n";
+
+			//try to find the channel in the map
+			//if NOT found, then add the channel 
+			//	w/ an initial vector that has the light
+			auto lightFoundIter = groupedColors.find(channel);
+			if (lightFoundIter == groupedColors.end())
+			{
+				//add the channel to the map 
+				//  w/ a vector for the value
+				//map[key] = value;
+				std::vector<Light> newChannel;
+				newChannel.push_back(light);
+				groupedColors[channel] = newChannel;
+
+				//OR...a shorthand way
+				//groupedColors[channel] = { light };
+			}
+			else
+			{
+				//add the light to the VALUE
+				std::vector<Light>& channelLights = lightFoundIter->second;
+				channelLights.push_back(light);
+			}
+
+		}
 
 
 		switch (section)

@@ -57,6 +57,18 @@ int main(int argc, char* args[])
 		std::cout << " and it costs " << menuItemPrice << ".\n";
 	}
 
+	//find(key) returns iterator to the key-value-pair
+	//  if key is NOT found, it returns map.end()
+	auto foundMenuIterator = menu.find("coffee");
+	if (foundMenuIterator == menu.end()) //means NOT FOUND
+	{
+		std::cout << "coffee is not on the menu?!?!?! WHAT?!\n";
+	}
+	else  //key WAS found
+	{
+		std::cout << "coffee costs " << foundMenuIterator->second << "\n";
+	}
+
 
 
 	//2 kinds of loops:
