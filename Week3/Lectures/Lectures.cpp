@@ -4,10 +4,22 @@
 #include "Day8.h"
 #include "Day9.h"
 #include "Input.h"
+#include <Player.h>
+#include <Color.h>
 
 
 int main(int argc, char* args[])
 {
+	Color clr;
+	clr.red = 255;
+	clr.green = clr.blue = 0;
+	clr.alpha = 255;
+
+	Player p1;//calling the default ctor
+	p1.SetGamerTag("BWayne173");
+	p1.Level(1);
+	std::cout << p1.GetGamerTag() << " " << p1.Level() << "\n";
+
     std::string hello = "Hello Week 3!";
     for (auto& ch : hello)
     {

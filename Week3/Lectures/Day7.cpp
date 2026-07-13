@@ -3,6 +3,7 @@
 #include "Console.h"
 #include "Input.h"
 #include <GameTextures.h>
+#include <Card.h>
 
 
 /*              CLASSESS
@@ -103,7 +104,7 @@ void Day7::PartA_1()
 						//
 						// TODO: Part A-1.2 Create a Card object
 						//
-
+						Card cardyB("Q", "Diamonds");
 
 						pos cardSize = GameTextures::CardSize(scale);
 						int x = 5;
@@ -112,6 +113,10 @@ void Day7::PartA_1()
 						//
 						// TODO: Part A-1.3  call GameTextures::RenderImage with the Card object
 						//
+						GameTextures::RenderImage(
+							cardyB.Face(),
+							cardyB.Suit(), 
+							x, y, scale);
 
 
 						//Update screen

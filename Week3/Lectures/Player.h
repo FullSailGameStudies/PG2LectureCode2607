@@ -8,6 +8,25 @@ class Player
 	//protected: (inheritance) this class and all classes that are
 	//		descendents of this class can see it
 public:
+	//constructors (ctors) - special methods to initialize the object
+	//  (set the fields)
+	//  all classes REQUIRE at least 1 ctor
+	//  IF you do not create a ctor, the compiler
+	//    will give you a default ctor
+	//  IF you do create a ctor, the compiler's
+	//    default ctor is no longer available
+	// 
+	//  no return type (not even void)
+	//  MUST be named exactly the same as the class
+	//  can have as many as you need (overload them)
+	//  can appear w/ any access modifier
+	Player() //default ctor (no parameters)
+	{
+		gamerTag_ = "";
+		level_ = 0;
+		health_ = 100;
+	}
+	Player(const std::string& tag, int level, int health);
 
 	//getters/setters - gatekeepers of the fields
 	//   they are usually DEFINED in the header
@@ -36,7 +55,7 @@ public:
 	}
 	void Level(int level)
 	{
-		if (level > 0 && level == level_ + 1)
+		if (level > 0)// && level == level_ + 1)
 		{
 			level_ = level;
 		}
