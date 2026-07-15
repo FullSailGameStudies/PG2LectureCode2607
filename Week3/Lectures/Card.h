@@ -7,7 +7,7 @@ public:
 		face_(face), suit_(suit)
 	{	}
 
-	int Value() const;
+	virtual int Value() const;
 	void Print() const;
 
 	const std::string& Face() const { return face_; }
@@ -33,7 +33,7 @@ public:
 		}
 	}
 
-private:
+protected:
 	//
 	// HAS-A relationship (containment or composition)
 	//	Card class HAS-A field called face_

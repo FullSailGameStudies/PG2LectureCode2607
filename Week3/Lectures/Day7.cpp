@@ -118,6 +118,9 @@ void Day7::PartA_1()
 							cardyB.Suit(), 
 							x, y, scale);
 
+						cardyB.Print();
+						std::cout << "Value: " << cardyB.Value() << "\n";
+
 
 						//Update screen
 						engine.Present();

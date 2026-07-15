@@ -9,9 +9,33 @@
 #include "Pistol.h"
 
 
+//overload on the types of the parameters
+float Add(float n1, float n2)
+{
+	return n1 + n2;
+}
+int Add(int n1, int n2)
+{
+	return n1 + n2;
+}
+//overload on the # of parameters
+int Add(int n1, int n2, int n3)
+{
+	return n1 + n2 + n3;
+}
+
 int main(int argc, char* args[])
 {
 	Pistol pewpew(200,100,5,15);
+	Pistol p2(100, 50, 6, 15);
+	Pistol p3 = pewpew + p2;
+	Weapon wpn(50, 100);
+	wpn.showMe();
+	pewpew.showMe();
+
+	int sum = Add(5, 2);
+	sum = Add(5, 2, 7);
+	sum = Add(5.0f, 4.1f);
 
 	Color clr;
 	clr.red = 255;

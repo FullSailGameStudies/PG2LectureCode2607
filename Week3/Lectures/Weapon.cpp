@@ -7,7 +7,7 @@ Weapon::Weapon(int range, int damage) : mRange(range), mDamage(damage)
 
 void Weapon::showMe()
 {
-	std::cout << "Range: " << mRange << " Damage: " << mDamage << "\n";
+	std::cout << "\nRange: " << mRange << " Damage: " << mDamage << "\n";
 }
 
 int Weapon::calcDamage()
