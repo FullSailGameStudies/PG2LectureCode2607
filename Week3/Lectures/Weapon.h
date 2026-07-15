@@ -6,6 +6,7 @@ private:
 	int mDamage;
 
 public:
+	
 	Weapon(int range, int damage);
 
 	virtual void showMe();

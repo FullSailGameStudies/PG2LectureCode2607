@@ -34,6 +34,9 @@ public:
 	}
 
 private:
+	//
+	// HAS-A relationship (containment or composition)
+	//	Card class HAS-A field called face_
 	std::string face_, suit_;
 };
 
