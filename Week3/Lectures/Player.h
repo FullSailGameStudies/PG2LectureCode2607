@@ -25,8 +25,30 @@ public:
 		gamerTag_ = "";
 		level_ = 0;
 		health_ = 100;
+		name_ = new std::string("Bruce Wayne");
 	}
 	Player(const std::string& tag, int level, int health);
+
+	//destructors destroy the object
+	//you can only have 1 destructor
+	//no parameters
+	//you need a destructor when...
+	//1) your object manages heap memory (means uses '= new')
+	//2) when your object is used polymorphicly. the destructor
+	//		needs to be virtual.
+	~Player()
+	{
+		//clean up any dynamic memory
+		Cleanup();
+	}
+	void Cleanup()
+	{
+		if (name_ != nullptr)
+		{
+			delete name_;
+			name_ = nullptr;
+		}
+	}
 
 	//getters/setters - gatekeepers of the fields
 	//   they are usually DEFINED in the header
@@ -71,6 +93,8 @@ private:
 	//		m_sGamerTag, m_gamerTag, mGamerTag, _gamerTag, gamerTag_
 	std::string gamerTag_;
 	int level_, health_;
+
+	std::string* name_;
 
 	void DoIt(int& level)
 	{

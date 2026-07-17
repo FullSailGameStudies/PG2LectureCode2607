@@ -8,6 +8,7 @@ protected:
 public:
 	
 	Weapon(int range, int damage);
+	virtual ~Weapon() = default;
 
 	//overriding:
 	//step 1: mark the BASE method as 'virtual'

@@ -7,6 +7,8 @@
 #include <Player.h>
 #include <Color.h>
 #include "Pistol.h"
+#include "Knife.h"
+#include <vector>
 
 
 //overload on the types of the parameters
@@ -97,10 +99,15 @@ int main(int argc, char* args[])
 	clr.green = clr.blue = 0;
 	clr.alpha = 255;
 
-	Player p1;//calling the default ctor
-	p1.SetGamerTag("BWayne173");
-	p1.Level(1);
-	std::cout << p1.GetGamerTag() << " " << p1.Level() << "\n";
+	{
+		Player p1;//calling the default ctor
+		p1.SetGamerTag("BWayne173");
+		p1.Level(1);
+		std::cout << p1.GetGamerTag() << " " << p1.Level() << "\n";
+	}//the destructor of p1 will be called when it goes out of scope
+
+	Player* player2 = new Player();
+	delete player2;//the destructor will be called
 
 	std::string hello = "Hello Week 3!";
 	for (auto& ch : hello)
@@ -108,6 +115,30 @@ int main(int argc, char* args[])
 		Console::Write(ch, (ConsoleColor)(rand() % 7 + 1));
 	}
 	std::cout << "\n";
+
+	//UPCASTING:
+	//	cast the pointer from the DERIVED type (Pistol or Knife)
+	//  to the BASE type (Weapon)
+	//  ALWAYS safe
+	{
+		std::vector<Weapon*> inventory;//stores memory locations
+		Knife stabby(3, 10, true);
+		inventory.push_back(new Pistol(100, 50, 6, 15));//copies the address-of pistol to a weapon pointer
+		inventory.push_back(new Knife(3, 10, true));
+		std::cout << "\n\nJohn Wick's Inventory:\n";
+		for (auto& wpn : inventory)
+		{
+			wpn->showMe();//runtime polymorphism here!!
+		}
+
+		//delete all of the heap weapons
+		for (int i = 0; i < inventory.size(); i++)
+		{
+			delete inventory[i];
+			inventory[i] = nullptr;
+		}
+	}//inventory goes out of scope
+
 
 	int menuSelection = 0;
 	std::vector<std::string> menuOptions{
