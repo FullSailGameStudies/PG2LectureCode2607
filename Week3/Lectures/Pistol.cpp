@@ -16,3 +16,8 @@ void Pistol::showMe()
 	Weapon::showMe();//call the base method
 	std::cout << "\tRounds: " << mRounds << "\tMagazine Capacity: " << mMagCap << "\n";
 }
+
+int Pistol::calcDamage()
+{
+	return Weapon::calcDamage();
+}

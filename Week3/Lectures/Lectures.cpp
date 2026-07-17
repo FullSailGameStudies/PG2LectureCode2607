@@ -24,13 +24,28 @@ int Add(int n1, int n2, int n3)
 	return n1 + n2 + n3;
 }
 
+
+void Counter()
+{
+	static int count = 0;
+	std::cout << count << " ";
+	count++;
+}
 int main(int argc, char* args[])
 {
+	for (int count = 0; count < 10; count++)
+	{
+		Counter();
+	}
+
+
 	Pistol pewpew(200,100,5,15);
 	Pistol p2(100, 50, 6, 15);
 	Pistol p3 = pewpew + p2;
-	Weapon wpn(50, 100);
-	wpn.showMe();
+
+	//cannot create objects of abstract base class types
+	//Weapon wpn(50, 100);
+	//wpn.showMe();
 	pewpew.showMe();
 
 	int sum = Add(5, 2);

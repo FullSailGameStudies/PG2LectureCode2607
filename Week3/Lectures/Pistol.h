@@ -29,6 +29,10 @@ public:
 	//	ensures that it is an actual override
 	void showMe() override;
 
+	//to make this class non-abstract, we must
+	//override calcDamage
+	int calcDamage() override;
+
 	int Rounds() const { return mRounds; }
 	int MagCapacity() const { return mMagCap; }
 

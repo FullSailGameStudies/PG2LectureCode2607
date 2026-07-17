@@ -15,7 +15,12 @@ public:
 	virtual void showMe();
 
 
-	int calcDamage();
+	//make this a PURE virtual function
+	//1) mark it as 'virtual'
+	//2) assign it a value of 0
+	//every class that inherits from Weapon and that 
+	//does NOT override calcDamage will ALSO be abstract
+	virtual int calcDamage() = 0;
 
 	int range() const
 	{
