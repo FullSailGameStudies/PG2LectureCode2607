@@ -9,6 +9,7 @@
 #include "Pistol.h"
 #include "Knife.h"
 #include <vector>
+#include "Car.h"
 
 
 //overload on the types of the parameters
@@ -35,6 +36,12 @@ void Counter()
 }
 int main(int argc, char* args[])
 {
+	Car noahs(2024, "Subaru", "CrossTrekk");
+	Car joses(2015, "Ford", "Focus");
+	noahs.vehicleInformation();
+	joses.vehicleInformation();
+	Car::reporting();
+
 	//for (int count = 0; count < 10; count++)
 	//{
 	//	Counter();
