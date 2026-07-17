@@ -33,15 +33,55 @@ void Counter()
 }
 int main(int argc, char* args[])
 {
-	for (int count = 0; count < 10; count++)
-	{
-		Counter();
-	}
+	//for (int count = 0; count < 10; count++)
+	//{
+	//	Counter();
+	//}
 
+	//these are all stack variables
+	int n2 = 10;
+	int n = 5;
+	int& nRef = n;
+	nRef = n2;//only copies n2 to nRef (n)
+	int* pNum;// = &n;
+	pNum = &n2;//pNum now points to n2. points to a stack variable
+	//modern C++ uses smart pointers (shared_ptr and unique_ptr)
+	//*ptr means "dereference" the pointer
+	//	go to the memory address and get the value
+	std::cout << *pNum << "\n";
 
-	Pistol pewpew(200,100,5,15);
+	Pistol* ptrGun = new Pistol(100, 50, 6, 15);
+	Pistol pewpew(200, 100, 5, 15);
 	Pistol p2(100, 50, 6, 15);
 	Pistol p3 = pewpew + p2;
+
+	ptrGun->showMe();
+	delete ptrGun;
+	ptrGun = nullptr;
+	if (ptrGun != nullptr)
+		ptrGun->showMe();
+
+	//heap memory
+	//separate section of computer memory
+	//use '=new' operator to reserve space in the heap
+	{
+		int* pNum2;//pNum2 is a stack variable
+		pNum2 = new int(25);//points pNum2 to HEAP memory
+		//shallow copy (only copying memory locations)
+		int* pNum3 = pNum2;//2 variables now point to 25
+		//MUST delete it
+		delete pNum2;
+	}//pNum2 is removed from the stack
+	//heap memory can last longer than a method call
+	//heap memory is allocated UNTIL you delete it
+	//you MUST delete heap memory when you're done with it
+	//it does not happen automatically!!!!!!
+
+	//to leak memory means it can't be cleaned up
+
+	Pistol* pGun = &p3;//& on the right-hand side means "address-of"
+	pGun->showMe();//use the '->' notation for pts to class objects
+	(*pGun).showMe();
 
 	//cannot create objects of abstract base class types
 	//Weapon wpn(50, 100);
@@ -62,12 +102,12 @@ int main(int argc, char* args[])
 	p1.Level(1);
 	std::cout << p1.GetGamerTag() << " " << p1.Level() << "\n";
 
-    std::string hello = "Hello Week 3!";
-    for (auto& ch : hello)
-    {
-        Console::Write(ch, (ConsoleColor)(rand() % 7 + 1));
-    }
-    std::cout << "\n";
+	std::string hello = "Hello Week 3!";
+	for (auto& ch : hello)
+	{
+		Console::Write(ch, (ConsoleColor)(rand() % 7 + 1));
+	}
+	std::cout << "\n";
 
 	int menuSelection = 0;
 	std::vector<std::string> menuOptions{
