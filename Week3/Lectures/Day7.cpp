@@ -151,7 +151,7 @@ void Day7::PartA_1()
 						int cardCount = 0;
 						for (auto& card : deckCards)
 						{
-							GameTextures::RenderImage(card.Face(), card.Suit(), x, y, scale);
+							GameTextures::RenderImage(card->Face(), card->Suit(), x, y, scale);
 							cardCount++;
 							if (cardCount == 13)
 							{

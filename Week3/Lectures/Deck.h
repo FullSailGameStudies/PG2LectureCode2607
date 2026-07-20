@@ -5,26 +5,28 @@
 class Deck
 {
 public:
-	Deck()
+	virtual ~Deck()
 	{
-		MakeCards();
+		Cleanup();
 	}
-	const std::vector<Card>& Cards() const
+	const std::vector<Card*>& Cards() const
 	{
 		return cards_;
 	}
-	void Cards(const std::vector<Card>& cards)
+	void Cards(const std::vector<Card*>& cards)
 	{
 		if (cards.size() == 52)
 			cards_ = cards;
 	}
 
 	bool HasCards() const;
-	void MakeCards();
-	Card DealCard();
+	virtual void MakeCards();
+	Card* DealCard();
 	void Shuffle();
 
-private:
-	std::vector<Card> cards_;
+protected:
+	std::vector<Card*> cards_;
+
+	void Cleanup();
 };
 

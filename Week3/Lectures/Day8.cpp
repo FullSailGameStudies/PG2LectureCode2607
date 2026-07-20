@@ -6,6 +6,7 @@
 #include "Input.h"
 #include <GameTextures.h>
 #include "BlackjackCard.h"
+#include <BlackjackDeck.h>
 
 
 const int SCREEN_WIDTH = 1024;
@@ -113,6 +114,8 @@ void Day8::PartB_1()
 						//
 						// TODO: Part B-2.2 Create a BlackjackDeck object
 						//
+						BlackjackDeck decky;
+						decky.Shuffle();
 
 						pos cardSize = GameTextures::CardSize(scale);
 						int x = 5;
@@ -121,7 +124,25 @@ void Day8::PartB_1()
 						//
 						// TODO: Part B-2.3 call GameTextures::RenderImage on each of the Card objects in the deck
 						//
+						auto& deckCards = decky.Cards();
 						int cardCount = 0;
+						for (auto& card : deckCards)
+						{
+							GameTextures::RenderImage(card->Face(), card->Suit(), x, y, scale);
+							cardCount++;
+							if (cardCount == 13)
+							{
+								//move to the next row
+								x = 5;
+								y += cardSize.y + 5;
+								cardCount = 0;
+							}
+							else
+							{
+								//move to the next column
+								x += cardSize.x + 5;
+							}
+						}
 
 						//Update screen
 						engine.Present();
