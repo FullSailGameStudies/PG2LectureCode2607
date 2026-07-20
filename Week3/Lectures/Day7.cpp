@@ -4,6 +4,7 @@
 #include "Input.h"
 #include <GameTextures.h>
 #include <Card.h>
+#include <Deck.h>
 
 
 /*              CLASSESS
@@ -135,6 +136,8 @@ void Day7::PartA_1()
 						//
 						// TODO: Part A-2.2 Create a Deck object
 						//
+						Deck decky;
+						decky.Shuffle();
 
 
 						pos cardSize = GameTextures::CardSize(scale);
@@ -144,7 +147,23 @@ void Day7::PartA_1()
 						//
 						// TODO: Part A-2.3  call GameTextures::RenderImage on each of the Card objects in the deck
 						//
+						auto& deckCards = decky.Cards();
 						int cardCount = 0;
+						for (auto& card : deckCards)
+						{
+							GameTextures::RenderImage(card.Face(), card.Suit(), x, y, scale);
+							cardCount++;
+							if (cardCount == 13)
+							{
+								x = 5;
+								y += cardSize.y + 5;
+								cardCount = 0;
+							}
+							else
+							{
+								x += cardSize.x + 5;
+							}
+						}
 
 
 						//Update screen
