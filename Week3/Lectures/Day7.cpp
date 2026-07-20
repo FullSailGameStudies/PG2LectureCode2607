@@ -155,12 +155,14 @@ void Day7::PartA_1()
 							cardCount++;
 							if (cardCount == 13)
 							{
+								//move to the next row
 								x = 5;
 								y += cardSize.y + 5;
 								cardCount = 0;
 							}
 							else
 							{
+								//move to the next column
 								x += cardSize.x + 5;
 							}
 						}
