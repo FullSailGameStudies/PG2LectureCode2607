@@ -4,6 +4,7 @@
 #include "Day11.h"
 #include "Input.h"
 #include <fstream>
+#include "Player.h"
 
 //
 //3 basic steps for File I/O
@@ -51,6 +52,21 @@ int main(int argc, char* args[])
 	}
 	//3) CLOSE the file
 	outFile.close();
+
+	Player p1;
+	//1) open the file
+	finalPath = path + "player.csv";
+	std::ofstream playerFile(finalPath);
+	if (playerFile.is_open())
+	{
+		p1.SerializeCSV(playerFile, delimiter);
+	}
+	else
+	{
+		std::cout << finalPath << " could not be opened.\n";
+	}
+	//3) CLOSE the file
+	playerFile.close();
 
     std::string hello = "Hello Week 4!";
     for (auto& ch : hello)

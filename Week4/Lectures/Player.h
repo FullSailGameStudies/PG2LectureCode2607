@@ -6,7 +6,7 @@ class Player
 {
 public:
 
-	Player() : worldX(0), worldY(0) {}
+	Player() : worldX(0), worldY(0), name("Bruce") {}
 
 	//
 	// Part B-1.1
@@ -20,6 +20,10 @@ public:
 	// Part B-2.3
 	//
 
+	//Serializing: 
+	//	saving the state of the object
+	//  serialize to a file, to memory, to another process...
+	void SerializeCSV(std::ofstream& outFile, char delimiter);
 
 	void MoveLeft() { worldX--; }
 	void MoveRight() { worldX++; }
@@ -34,6 +38,7 @@ public:
 
 	void Info();
 private:
+	std::string name;
 	int worldX, worldY;
 };
 
