@@ -25,7 +25,7 @@ int main(int argc, char* args[])
 	//		path to the file
 	//		- full paths
 	//		- relative paths
-	std::string path = "C:/temp/2607/";
+	std::string path = "";// "C:/temp/2607/";
 	std::string fileName = "2607.csv";
 	std::string finalPath = path + fileName;
 
@@ -130,6 +130,26 @@ int main(int argc, char* args[])
 	}
 	//3) CLOSE the file
 	playerFile.close();
+
+
+	std::ifstream inPlayerFile(finalPath);
+	if (inPlayerFile.is_open())
+	{
+		std::string playerLine;
+		std::getline(inPlayerFile, playerLine);
+		//2 approaches:
+		//initialize an existing object
+		p1.DeserializeCSV(playerLine, delimiter);
+
+		//OR, initialize a new Player object
+		Player p2(playerLine, delimiter);
+	}
+	else
+	{
+		std::cout << finalPath << " could not be opened.\n";
+	}
+	//3) CLOSE the file
+	inPlayerFile.close();
 
     std::string hello = "Hello Week 4!";
     for (auto& ch : hello)

@@ -25,6 +25,18 @@ public:
 	//  serialize to a file, to memory, to another process...
 	void SerializeCSV(std::ofstream& outFile, char delimiter);
 
+	//Deserializing
+	//   loading the state of the object
+	//	doesn't care where the data is coming from
+	//  doesn't need to know where
+	//  it just needs to csv data
+	void DeserializeCSV(const std::string& csvData, char delimiter);
+
+	Player(const std::string& csvData, char delimiter)
+	{
+		DeserializeCSV(csvData, delimiter);
+	}
+
 	void MoveLeft() { worldX--; }
 	void MoveRight() { worldX++; }
 	void MoveUp() { worldY--; }

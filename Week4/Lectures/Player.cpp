@@ -20,6 +20,23 @@ void Player::SerializeCSV(std::ofstream& outFile, char delimiter)
 	outFile << name << delimiter << worldX << delimiter << worldY;
 }
 
+void Player::DeserializeCSV(const std::string& csvData, char delimiter)
+{
+	//parse the data from the string
+	//convert the string to a stream
+	std::stringstream csvStream(csvData);
+	std::getline(csvStream, name, delimiter);
+
+	std::string temp;
+	std::getline(csvStream, temp, delimiter);
+	//convert the temp string into an int
+	worldX = std::stoi(temp);
+
+	std::getline(csvStream, temp, delimiter);
+	//convert the temp string into an int
+	worldY = std::stoi(temp);
+}
+
 void Player::Info()
 {
 	Console::SetCursorPosition(0, 12);
