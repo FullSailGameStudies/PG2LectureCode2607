@@ -3,8 +3,9 @@
 #include "Day10.h"
 #include "Day11.h"
 #include "Input.h"
-#include <fstream>
+#include <fstream> //for ofstream and ifstream
 #include "Player.h"
+#include <sstream>//for stringstream
 
 //
 //3 basic steps for File I/O
@@ -43,7 +44,7 @@ int main(int argc, char* args[])
 	{
 		//2) write to the file
 		outFile << "Batman is the GOAT!\n";
-		outFile << 4.2 << delimiter << true << delimiter << 13 << "\n";
+		outFile << 4.2 << delimiter << "true" << delimiter << 13 << "\n";
 		outFile << "Aquaman smells.";
 	}
 	else
@@ -52,6 +53,68 @@ int main(int argc, char* args[])
 	}
 	//3) CLOSE the file
 	outFile.close();
+
+
+	//READING csv data
+	//1) open the file
+	//	std::ifstream - 'i' input
+	std::ifstream inFile(finalPath);
+	if (inFile.is_open())
+	{
+		//2) reading the file
+		std::string line;
+		//reads the stream until it reaches
+		// a '\n' OR the end of the stream
+		std::getline(inFile, line);
+		std::cout << line << "\n";
+
+		//read the next line
+		std::getline(inFile, line);
+		std::cout << line << "\n";
+		//PARSE the line
+		//  read the data from the string
+		//convert the line string into a stream
+		std::stringstream lineStream(line);
+		std::string data;
+		//reads until it reaches a delimiter
+		//OR the end of the stream
+		std::getline(lineStream, data, delimiter);
+		//convert the string to the proper type
+		double dVal = std::stod(data);
+		std::cout << dVal << "\n";
+
+		//try-catch
+		//after the try block, add at least 1 catch block
+		//to handle the possible exceptions
+		//don't put try-catches everywhere
+		//it is somewhat 'expensive'
+		std::getline(lineStream, data, delimiter);
+		try
+		{
+			//put the code that MIGHT throw an exception
+			//into a 'try' block
+			bool bVal = std::stoi(data);
+			std::cout << bVal << "\n";
+		}
+		//put the more SPECIFIC exceptions first
+		//followed by the more GENERAL exceptions
+		catch (const std::exception& ex)
+		{
+			std::cout << "Error parsing data: " << data << "\n";
+			std::cout << ex.what() << "\n";
+		}
+
+		std::getline(lineStream, data, delimiter);
+		int iVal = std::stoi(data);
+		std::cout << iVal << "\n";
+	}
+	else
+	{
+		std::cout << finalPath << " could not be opened.\n";
+	}
+	//3) CLOSE the file
+	inFile.close();
+
 
 	Player p1;
 	//1) open the file
